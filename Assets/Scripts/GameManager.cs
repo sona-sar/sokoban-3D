@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Material normalBoxMaterial;
     [SerializeField] private Material goalBoxMaterial;
     [SerializeField] private GameObject levelCompleteUI;
-    [SerializeField] private GameObject topReplayButton;
+    [SerializeField] private GameObject inGameUI;
 
     private List<BoxController> boxesInScene = new List<BoxController>();
 
@@ -42,8 +42,8 @@ public class GameManager : MonoBehaviour
         
         if (levelCompleteUI != null)
             levelCompleteUI.SetActive(false);
-        if (topReplayButton != null)
-            topReplayButton.SetActive(true);
+        if (inGameUI != null)
+            inGameUI.SetActive(true);
     }
 
     public void RegisterBox(BoxController box)
@@ -65,7 +65,6 @@ public class GameManager : MonoBehaviour
         if (boxRenderer != null)
         {
             boxRenderer.material = isOnGoal ? goalBoxMaterial : normalBoxMaterial;
-            Debug.Log(boxRenderer.material.name);
         }
     }
 
@@ -80,7 +79,7 @@ public class GameManager : MonoBehaviour
         if (count == 0)
         {
             levelCompleteUI.SetActive(true);
-            topReplayButton.SetActive(false);
+            inGameUI.SetActive(false);
         }
     }
 

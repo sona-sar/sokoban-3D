@@ -6,6 +6,8 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     [SerializeField] private Sprite buttonNormal;
     [SerializeField] private Sprite buttonHovered;
+
+    AudioManager audioManager;
     
     private Image buttonImage;
 
@@ -13,10 +15,15 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         buttonImage = GetComponent<Image>();
         buttonImage.sprite = buttonNormal;
+        audioManager = GameObject.FindWithTag("AudioManager")?.GetComponent<AudioManager>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (audioManager != null)
+        {
+            audioManager.PlayButtonSound();
+        }
         buttonImage.sprite = buttonHovered;
     }
 

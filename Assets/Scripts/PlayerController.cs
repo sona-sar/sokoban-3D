@@ -8,6 +8,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float gridMoveDistance = 2f;
 
+    AudioManager audioManager;
+
+    void Start()
+    {
+        audioManager = GameObject.FindWithTag("AudioManager")?.GetComponent<AudioManager>();
+    }
+
     void Update()
     {
         if(isMoving) return;
@@ -37,6 +44,8 @@ public class Player : MonoBehaviour
 
     private void TryToMove(Vector3 direction)
     {
+        transform.forward = direction;
+        
         Vector3 normalizedDirection = direction.normalized;
         Vector3 scaledDirection = normalizedDirection * gridMoveDistance;
         Vector3 targetPosition = transform.position + scaledDirection;
@@ -58,13 +67,16 @@ public class Player : MonoBehaviour
     private IEnumerator MoveToTarget(Vector3 target)
     {
         isMoving = true;
+        if (audioManager != null)
+        {
+            audioManager.PlayMoveSound();
+        }
         while (Vector3.Distance(transform.position, target) > 0.01f)
         {
             transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * moveSpeed);
             yield return null;
         }
         transform.position = target;
-        
         isMoving = false;
     }
 }

@@ -57,7 +57,6 @@ public class BoxController : MonoBehaviour
     {
         if(other.CompareTag("Goal"))
         {
-            Debug.Log("Goal Triggered");
             goalCount++;
             if (GameManager.instance != null)
             {

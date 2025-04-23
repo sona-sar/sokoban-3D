@@ -5,6 +5,7 @@ public class LevelUIManager : MonoBehaviour
 {
     public void OnReplayButton()
     {
+        Debug.Log("Replay Button Pressed");
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -21,6 +22,22 @@ public class LevelUIManager : MonoBehaviour
         StartCoroutine(SceneTransition.instance.LoadAScene(1)); 
     }
 
+    public void OnToggleMusic()
+    {
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.ToggleMusic();
+        }
+    }
+
+    public void OnToggleSound()
+    {
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.ToggleSound();
+        }
+    }
+
     public void OnLevelsButton(){
         //trigger levels to open in canvas
     }
@@ -31,8 +48,7 @@ public class LevelUIManager : MonoBehaviour
 
     public void OnHomeButton()
     {
+        Debug.Log("Home Button Pressed");
         StartCoroutine(SceneTransition.instance.LoadAScene(0));
     }
-
-    
 }
